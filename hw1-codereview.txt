@@ -1,0 +1,25 @@
+Code Review
+
+Violation 1 - Information Hiding
+
+Everything is in a single class, and every function has access to every other function as everything is public. Altering any object may cause issues with the rest of the code. Everything is also easily accessible by the end user for modification.
+
+To solve this, we separate the code into three classes following the Model View Controller architecture. On top of this, we private many variables and objects to make them less easily accessible. 
+
+Violation 2 - Redundancy
+
+Not only does all of our code reside in one class, but also in one method. This means we have the rewrite many commonly used lines of code, which can lead to minor mistakes that will be buried under the illegible code.
+
+To solve this, we separate the code into smaller, more workable classes and methods. This way, we can avoid rewriting common lines of code, and work on the smaller parts that integrate together.
+
+Violation 3 - Open Closed Principle
+
+Because the code is in one class and one method, it terribly violates the open closed principle. In order to extend our program, we're at risk of having to potentially start over from scratch, as all of our logic is intertwined with the GUI. 
+
+To solve this, we make sure each individual task that our program needs to execute lives in it's own encapsulated method, which then still lives in their own class. This way, we can easily switch out any of our parts without having to alter our preexisting code, and achieve modularity. 
+
+Violation 4 - Testing
+
+It would be a mountain of a feat to make sure our code actually works, especially with edge cases. Everything is so intermingled that even if we know what the problem is, it's nearly impossible to separate our code to see which componenet actually caused it. 
+
+To solve this, we separate the code into different components, so it's extremely clear when something breaks to find what caused it.
