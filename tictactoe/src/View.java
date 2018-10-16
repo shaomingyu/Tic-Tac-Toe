@@ -50,7 +50,11 @@ public class View{
 
         gui.setVisible(true);
 	}
-
+	public void update(int row, int col, char player, String text) {
+		blocks[row][col].setText(Character.toString(player));
+		blocks[row][col].setEnabled(false); //blocks that have been played can't be clicked
+		playerTurn.setText(text);
+	}
 	public void resetView() { //resets to default view state
 		for(int row = 0; row < 3; row++) {
 			for(int col = 0; col < 3; col++) {

@@ -9,10 +9,6 @@ public class Model {
 	}
 	
 	public void makeMove(int x, int y) {
-		if(!valid(x, y)) {
-			System.out.println("Invalid Move"); //temporary, not sure how view will look yet
-			return;
-		}
 		if(turn % 2 == 0) { //check's who's turn it is. X moves on even turns, O moves on odd turns.
 			board[x][y] = 'X';
 			turn++;
@@ -77,13 +73,6 @@ public class Model {
 			System.out.println("O Wins");
 			reset();
 		}
-	}
-
-	public boolean valid(int x, int y) {
-		if(board[x][y] == 'X' || board[x][y] == 'Y') {
-			return false;
-		}
-		return true;
 	}
 
 	public void reset() {
