@@ -1,5 +1,5 @@
 package view;
-
+// the gui, sends user inputs to controller
 import controller.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -46,7 +46,7 @@ public class View{
         playerTurn.setText("Player 1 to play 'X'");
 
         reset.addActionListener(new ActionListener() { 
-        	public void resetAll(ActionEvent e) {
+        	public void actionPerformed(ActionEvent e) {
         		resetView();
         		controller.resetModel();
         	}
@@ -58,8 +58,14 @@ public class View{
                 blocks[row][col].setPreferredSize(new Dimension(75,75));
                 blocks[row][col].setText("");
                 blocks[row][col].addActionListener(new ActionListener() {
-                	public void controllerMove(ActionEvent e) {
-                		controller.sendMove(row, col);
+                	public void actionPerformed (ActionEvent e) {
+                		for(int r = 0; r < 3; r++) {
+                			for(int c = 0; c < 3; c++) {
+                				if(e.getSource() == blocks[r][c]) {
+                					controller.sendMove(r, c);
+                				}
+                			}
+                		}
                 	}
                	});
                 game.add(blocks[row][col]);
@@ -92,4 +98,4 @@ public class View{
 		}
 		playerTurn.setText("Player 1 to play 'X'");
 	}
-}
+ }

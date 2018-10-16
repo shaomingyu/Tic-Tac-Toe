@@ -1,5 +1,5 @@
 package controller;
-
+// getting inputs from View and sending them to Model
 import model.*;
 import view.*;
 

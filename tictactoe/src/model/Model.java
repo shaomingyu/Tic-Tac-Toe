@@ -1,7 +1,8 @@
+package model;
 import view.*;
 
 public class Model {
-	
+	//All the logic, as well as updating view
 
 	private int turn;
 	private char[][] board;
@@ -19,26 +20,28 @@ public class Model {
 	public void makeMove(int x, int y) {
 		if(turn % 2 == 0) { //check's who's turn it is. X moves on even turns, O moves on odd turns.
 			board[x][y] = 'X';
-			turn++;
 			if(winner(x, y)) {
-				View.update(x, y, 'X', "Player 1 wins!"); //sets winner to X if game is in winning state
-				View.winState();
+				view.update(x, y, 'X', "Player 1 wins!"); //sets winner to X if game is in winning state
+				view.winState();
 			}
-			View.update(x, y, 'X', "'O': Player 2");
+			else {
+				view.update(x, y, 'X', "'O': Player 2");
+			}
+			
 		}
 		else {
 			board[x][y] = 'O';
-			turn++;
 			if(winner(x, y)) {
-				View.update(x, y, 'O', "Player 2 wins!"); //sets winner to O if game is in a winning state
-				View.winState();
+				view.update(x, y, 'O', "Player 2 wins!"); //sets winner to O if game is in a winning state
+				view.winState();
 			}
 			else {
-				View.update(x, y, 'O', "'X': Player 1");
+				view.update(x, y, 'O', "'X': Player 1");
 			}
 		}
+		turn++;
 		if(turn >= 9) {
-			text = "Game ends in a draw"; //sets game to tie 
+				view.update(x, y, 'O', "Game ends in a draw");
 		}
 	}
 
