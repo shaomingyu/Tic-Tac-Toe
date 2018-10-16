@@ -10,25 +10,25 @@ public class Model {
 	
 	public void makeMove(int x, int y) {
 		if(!valid(x, y)) {
-			System.out.println("Invalid Move");
+			System.out.println("Invalid Move"); //temporary, not sure how view will look yet
 			return;
 		}
 		if(turn % 2 == 0) { //check's who's turn it is. X moves on even turns, O moves on odd turns.
 			board[x][y] = 'X';
 			turn++;
 			if(winner(x, y)) {
-				end(1);
+				end(1); //sets winner to x if game is in winning state
 			}
 		}
 		else {
 			board[x][y] = 'O';
 			turn++;
 			if(winner(x, y)) {
-				end(2);
+				end(2); //sets winner to x if game is in a winning state
 			}
 		}
 		if(turn >= 9) {
-			end(0);
+			end(0); //sets game to tie 
 		}
 	}
 
@@ -46,20 +46,20 @@ public class Model {
 		}		
 		for(int i = 0; i < 3; i++) {
 			if(board[x][i] == player) {
-				row++;
+				row++; //checks if the row you just moved in has 3 in a row
 			}
 			if(board[i][y] == player) {
-				col++;
+				col++; //checks if the column you just moved in has 3 in a row
 			}
 			if(board[i][i] == player) {
-				diagOne++;
-			}
+				diagOne++; //checks diagonals
+			} 
 			if(board[2-i][i] == player) {
 				diagTwo++;	
 			}
 		}
 		if(col == 3 || row == 3 || diagOne == 3 || diagTwo == 3) {
-			return true;
+			return true; //if three in a row, returns true
 		}
 		return false;
 	}
@@ -87,7 +87,7 @@ public class Model {
 	}
 
 	public void reset() {
-		turn = 0;
-		board = new char[3][3];
+		turn = 0; //sets model back to starting state
+		board = new char[3][3]; //I think trash collector handles this
 	}
 }
