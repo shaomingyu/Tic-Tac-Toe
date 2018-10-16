@@ -15,10 +15,10 @@ public class View{
 		this.blocks = new JButton[3][3];
 		this.reset = new JButton("Reset");
 		this.playerTurn = new JTextArea();
-		initialize();
+		setup();
 	}
 
-	public void initialize() { //creates the board, message bar, and reset button
+	public void setup() { //creates the board, message bar, and reset button
 		gui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		gui.setSize(new Dimension(500, 350));
         gui.setResizable(true);
@@ -50,11 +50,21 @@ public class View{
 
         gui.setVisible(true);
 	}
+	
 	public void update(int row, int col, char player, String text) {
 		blocks[row][col].setText(Character.toString(player));
 		blocks[row][col].setEnabled(false); //blocks that have been played can't be clicked
 		playerTurn.setText(text);
 	}
+
+	public void winState() { //freezes board so when the game is over, the player must hit the reset button
+		for(int row = 0; row < 3; row++) {
+			for (int col = 0; col < 3; col++) {
+				blocks[row][col].setEnabled(false);
+			}
+		}
+	}
+	
 	public void resetView() { //resets to default view state
 		for(int row = 0; row < 3; row++) {
 			for(int col = 0; col < 3; col++) {

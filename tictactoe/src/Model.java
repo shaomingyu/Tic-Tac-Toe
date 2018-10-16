@@ -1,11 +1,19 @@
+import view.*;
+
 public class Model {
 	
+
 	private int turn;
 	private char[][] board;
+	private View view;
 
 	public Model() {
 		board = new char[3][3]; //initializing empty 3x3 board
 		turn = 0; //initializing turn count
+	}
+
+	public void setView(View v) {
+		this.view = v;
 	}
 	
 	public void makeMove(int x, int y) {
@@ -13,18 +21,24 @@ public class Model {
 			board[x][y] = 'X';
 			turn++;
 			if(winner(x, y)) {
-				end(1); //sets winner to x if game is in winning state
+				View.update(x, y, 'X', "Player 1 wins!"); //sets winner to X if game is in winning state
+				View.winState();
 			}
+			View.update(x, y, 'X', "'O': Player 2");
 		}
 		else {
 			board[x][y] = 'O';
 			turn++;
 			if(winner(x, y)) {
-				end(2); //sets winner to x if game is in a winning state
+				View.update(x, y, 'O', "Player 2 wins!"); //sets winner to O if game is in a winning state
+				View.winState();
+			}
+			else {
+				View.update(x, y, 'O', "'X': Player 1");
 			}
 		}
 		if(turn >= 9) {
-			end(0); //sets game to tie 
+			text = "Game ends in a draw"; //sets game to tie 
 		}
 	}
 
@@ -58,21 +72,6 @@ public class Model {
 			return true; //if three in a row, returns true
 		}
 		return false;
-	}
-
-	public void end(int x) { // 0 = Tie, 1 = X win, 2 = O win
-		if(x == 0) {
-			System.out.println("Tie");
-			reset();
-		}
-		else if(x == 1) {
-			System.out.println("X Wins");
-			reset();
-		}
-		else {
-			System.out.println("O Wins");
-			reset();
-		}
 	}
 
 	public void reset() {
