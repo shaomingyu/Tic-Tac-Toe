@@ -81,6 +81,10 @@ public class View{
 		playerTurn.setText(text);
 	}
 
+	public String getButton(int x, int y) {
+		return blocks[x][y].getText();
+	}
+
 	public void winState() { //freezes board so when the game is over, the player must hit the reset button
 		for(int row = 0; row < 3; row++) {
 			for (int col = 0; col < 3; col++) {

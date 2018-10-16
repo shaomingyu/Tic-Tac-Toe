@@ -14,6 +14,10 @@ public class Controller {
 		model.makeMove(x, y);
 	}
 
+	public int getTurn() {
+		return model.getTurn();
+	}
+
 	public void resetModel() {
 		model.reset();
 	}

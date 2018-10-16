@@ -17,6 +17,18 @@ public class Model {
 		this.view = v;
 	}
 	
+	public void setTurn(int x) {
+		turn = x;
+	}
+
+	public int getTurn() {
+		return turn;
+	}
+
+	public char getBoard(int x, int y) {
+		return board[1][1];
+	}
+
 	public void makeMove(int x, int y) {
 		if(turn % 2 == 0) { //check's who's turn it is. X moves on even turns, O moves on odd turns.
 			board[x][y] = 'X';
