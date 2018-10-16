@@ -1,5 +1,6 @@
 package view;
 
+import controller.*;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -9,6 +10,11 @@ public class View{
 	private JButton[][] blocks;
 	private JButton reset;
 	private JTextArea playerTurn;
+	private Controller controller;
+
+	public void setController(Controller c) {
+		controller = c;
+	}
 
 	public View() {
 		this.gui = new JFrame("Tic Tac Toe");
@@ -18,7 +24,7 @@ public class View{
 		setup();
 	}
 
-	public void setup() { //creates the board, message bar, and reset button
+	public void setup() { //creates the board, message bar, and reset button, ripped from TicTacToe
 		gui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		gui.setSize(new Dimension(500, 350));
         gui.setResizable(true);
@@ -39,13 +45,25 @@ public class View{
         messages.add(playerTurn);
         playerTurn.setText("Player 1 to play 'X'");
 
-        for(int row = 0; row<3; row++) {
-            for(int column = 0; column<3 ;column++) {
-                blocks[row][column] = new JButton();
-                blocks[row][column].setPreferredSize(new Dimension(75,75));
-                blocks[row][column].setText("");
-                game.add(blocks[row][column]);
+        reset.addActionListener(new ActionListener() { 
+        	public void resetAll(ActionEvent e) {
+        		resetView();
+        		controller.resetModel();
         	}
+        });
+
+        for(int row = 0; row < 3; row++) {
+            for(int col = 0; col < 3; col++) {
+                blocks[row][col] = new JButton();
+                blocks[row][col].setPreferredSize(new Dimension(75,75));
+                blocks[row][col].setText("");
+                blocks[row][col].addActionListener(new ActionListener() {
+                	public void controllerMove(ActionEvent e) {
+                		controller.sendMove(row, col);
+                	}
+               	});
+                game.add(blocks[row][col]);
+            }
         }
 
         gui.setVisible(true);
